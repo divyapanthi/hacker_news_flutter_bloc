@@ -21,29 +21,23 @@ class MyApp extends StatelessWidget {
         create: (context){
           return CounterBloc();
         },
-          child: MyHomePage(title: 'Counter App')
+          child: MyHomePage(title: 'Counter app with bloc')
       ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
+class MyHomePage extends StatelessWidget {
+  // int _counter = 0;
   final String title;
+  MyHomePage({required this.title});
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<CounterBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Center(
         child: BlocBuilder<CounterBloc, CounterState>(
@@ -78,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: (){
             bloc.add(DecrementEvent());
             },
-            tooltip: 'Increment',
+            tooltip: 'Decrement',
             child: Icon(Icons.remove),
           ),
         ],
