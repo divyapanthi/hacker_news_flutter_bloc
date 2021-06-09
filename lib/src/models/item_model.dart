@@ -2,6 +2,8 @@ class ItemModel {
   String? by;
   int? descendants;
   int? id;
+  bool? deleted;
+  bool? dead;
   int? parent;
   List<int>? kids;
   int? score;
@@ -14,6 +16,8 @@ class ItemModel {
       {this.by,
         this.descendants,
         this.id,
+        this.deleted,
+        this.dead,
         this.parent,
         this.kids,
         this.score,
@@ -26,8 +30,10 @@ class ItemModel {
     by = json['by'];
     descendants = json['descendants'];
     id = json['id'];
+    deleted = json['deleted'];
+    dead = json['dead'];
     parent = json['parent'];
-    kids = json['kids'];
+    kids = json['kids'].cast<int>();
     score = json['score'];
     time = json['time'];
     title = json['title'];
@@ -40,6 +46,8 @@ class ItemModel {
     data['by'] = this.by;
     data['descendants'] = this.descendants;
     data['id'] = this.id;
+    data['deleted'] = this.deleted;
+    data['dead'] = this.dead;
     data['parent'] = this.parent;
     data['kids'] = this.kids;
     data['score'] = this.score;
