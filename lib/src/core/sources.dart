@@ -7,5 +7,5 @@ abstract class Source{
 }
 
 abstract class Cache {
-  Future<int> insertItem(ItemModel model);
+  Future<int> insertItem(ItemModel item);
 }
