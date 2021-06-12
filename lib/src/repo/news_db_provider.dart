@@ -46,7 +46,7 @@ class NewsDbProvider{
 
   Future insertItem(ItemModel item) async{
     if(_db == null) await _init();
-    _db!.insert(ITEM_TABLE, item.toJson());
+    _db!.insert(ITEM_TABLE, item.toDb());
   }
 
   Future<ItemModel?> fetchItem(int id) async{
@@ -59,6 +59,6 @@ class NewsDbProvider{
     );
 
     if(data.length!=1) return null;
-    return ItemModel.fromJson(data.first);
+    return ItemModel.fromDb(data.first);
   }
 }
