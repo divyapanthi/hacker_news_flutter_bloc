@@ -1,13 +1,13 @@
 import 'dart:io';
-
 import 'package:hacker_news/src/core/constants.dart';
+import 'package:hacker_news/src/core/sources.dart';
 import 'package:hacker_news/src/models/item_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:path/path.dart' as path;
 
-class NewsDbProvider{
+class NewsDbProvider implements Source, Cache{
   Database? _db;
 
   NewsDbProvider() {
@@ -44,11 +44,15 @@ class NewsDbProvider{
     );
   }
 
-  Future insertItem(ItemModel item) async{
+  @override
+  Future<int> insertItem(ItemModel item) async{
     if(_db == null) await _init();
-    _db!.insert(ITEM_TABLE, item.toDb());
+    return _db!.insert(
+        ITEM_TABLE, item.toDb()
+    );
   }
 
+  @override
   Future<ItemModel?> fetchItem(int id) async{
     if(_db == null) await _init();
     // final data = await _db!.rawQuery("SELECT * FROM $ITEM_TABLE where id = $id");
@@ -60,5 +64,11 @@ class NewsDbProvider{
 
     if(data.length!=1) return null;
     return ItemModel.fromDb(data.first);
+  }
+
+  @override
+  Future<List<int>> fetchTopIds() async {
+    // TODO: implement fetchTopIds
+    return [];
   }
 }
