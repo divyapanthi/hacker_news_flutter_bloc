@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacker_news/src/models/item_model.dart';
+import 'package:hacker_news/src/screens/comment_screen.dart';
 import 'package:hacker_news/src/widgets/loading_container.dart';
 
 class NewsItem extends StatelessWidget {
@@ -17,24 +18,33 @@ class NewsItem extends StatelessWidget {
           }
           final data = snapshot.data;
           if (data == null) {
-            return LoadingContainer();
+            return Container();
           }
 
           return Column(
             children: [
-              ListTile(
-                title: Text(data.title!),
-                subtitle: Text("${data.score} votes"),
-                trailing: Column(
-                  children: [
-                    Icon(Icons.comment),
-                    Text("${data.kids!.length}"),
-                  ],
+              Card(
+                child: ListTile(
+                  onTap: (){
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context){
+                          return CommentScreen(item:data);
+                    }));
+                  },
+                  title: Text(data.title!),
+                  subtitle: Text("${data.score} votes"),
+                  trailing: Column(
+                    children: [
+                      Icon(Icons.comment),
+                      Text("${data.kids == null ? 0 : data.kids!.length}"),
+                    ],
+                  ),
                 ),
               ),
+            Divider(),
             ],
           );
         }
     );
   }
-  }
+}

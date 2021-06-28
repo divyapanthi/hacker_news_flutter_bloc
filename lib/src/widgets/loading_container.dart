@@ -7,13 +7,13 @@ class LoadingContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Container(
-        color: Colors.grey.shade600,
-        height: 40,
+        color: Colors.grey.shade400,
+        height: 50,
         margin: EdgeInsets.only(bottom: 4),
       ),
       subtitle: Container(
-        color: Colors.grey.shade600,
-        height: 30,
+        color: Colors.grey.shade400,
+        height: 40,
       ),
       // ),
     );
